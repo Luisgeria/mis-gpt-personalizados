@@ -4,243 +4,537 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GPTs Educativos Personalizados</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
+    :root {
+      --primary: #4361ee;
+      --secondary: #3f37c9;
+      --accent: #4895ef;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #4cc9f0;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
       margin: 0;
-      padding: 20px;
-      color: #333;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-    th, td {
-      text-align: left;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-    th {
-      background-color: #f0f0f0;
-    }
-    a {
-      color: #1a73e8;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .footer {
-      margin-top: 30px;
-      text-align: center;
-      font-size: 13px;
-      color: #555;
-      border-top: 1px solid #ccc;
-      padding-top: 20px;
-    }
-    .footer-text {
-      display: block;
-      margin: 0 auto;
-      background-color: #f9f9f9;
-      padding: 15px;
-      border: 1px solid #000;
-      font-family: 'Courier New', monospace;
-      max-width: 100%;
+      padding: 0;
       box-sizing: border-box;
     }
-
-    @media screen and (max-width: 600px) {
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Header */
+    header {
+      text-align: center;
+      margin: 30px 0 40px;
+      animation: fadeInDown 0.8s ease;
+    }
+    
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .logo i {
+      font-size: 2.8rem;
+      color: var(--primary);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+    
+    /* Filtros */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      animation: fadeIn 0.8s ease 0.2s both;
+    }
+    
+    .filter-btn {
+      background: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+    
+    .filter-btn i {
+      font-size: 1.1rem;
+    }
+    
+    /* Tabla */
+    .table-container {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease 0.4s both;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    
+    thead {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+    
+    th {
+      padding: 18px 15px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    th:first-child {
+      border-top-left-radius: 20px;
+    }
+    
+    th:last-child {
+      border-top-right-radius: 20px;
+    }
+    
+    tbody tr {
+      transition: var(--transition);
+      border-bottom: 1px solid var(--light-gray);
+    }
+    
+    tbody tr:nth-child(even) {
+      background-color: rgba(67, 97, 238, 0.03);
+    }
+    
+    tbody tr:hover {
+      background-color: rgba(67, 97, 238, 0.08);
+      transform: translateX(5px);
+    }
+    
+    td {
+      padding: 16px 15px;
+      font-size: 0.95rem;
+      color: var(--dark);
+    }
+    
+    .type-tag {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: rgba(67, 97, 238, 0.15);
+      color: var(--primary);
+    }
+    
+    .access-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+    }
+    
+    .access-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+    }
+    
+    .access-btn i {
+      font-size: 0.9rem;
+    }
+    
+    /* Footer */
+    .footer {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: var(--card-shadow);
+      margin-top: 20px;
+      animation: fadeIn 0.8s ease 0.6s both;
+    }
+    
+    .footer-text {
+      background: linear-gradient(135deg, #f0f4ff, #e6ebff);
+      padding: 25px;
+      border-radius: 15px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      border-left: 4px solid var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer-text::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    
+    .signature {
+      text-align: right;
+      margin-top: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      font-style: italic;
+    }
+    
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .filters {
+        justify-content: flex-start;
+      }
+      
       table, thead, tbody, th, td, tr {
         display: block;
-        width: 100%;
       }
+      
       thead {
         display: none;
       }
+      
       tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 8px;
-        background-color: #fafafa;
+        margin-bottom: 20px;
+        border: 1px solid var(--light-gray);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
       }
+      
       td {
-        text-align: left;
-        padding: 8px 10px;
-        border: none;
-        position: relative;
+        display: flex;
+        padding: 15px;
+        border-bottom: 1px solid var(--light-gray);
       }
+      
+      td:last-child {
+        border-bottom: none;
+      }
+      
       td::before {
         content: attr(data-label);
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-        color: #444;
+        font-weight: 600;
+        width: 120px;
+        min-width: 120px;
+        color: var(--primary);
+      }
+      
+      .type-tag {
+        margin-top: 5px;
+      }
+      
+      .access-btn {
+        margin-top: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .logo i {
+        font-size: 2.2rem;
+      }
+      
+      td::before {
+        width: 100px;
+        min-width: 100px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>GPTs Educativos Personalizados</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Enlace</th>
-          <th>Tipo</th>
-        </tr>
-      </thead>
-      <tbody>
-<tr>
-  <td data-label="Nombre">Profe de Mate ESO</td>
-  <td data-label="Descripción">Explica conceptos, resuelve ejercicios y ayuda a preparar clases de matemáticas para la ESO.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67d9641770cc8191a2ee15207fca1fea-profe-de-mate-eso-explicaciones-ejercicios-y-mas" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Asignatura ESO</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Asistente de comunicación institucional</td>
-  <td data-label="Descripción">Redacta y mejora comunicaciones institucionales aplicando las 7 Cs.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-681dbec91b7481918b3b9d94ccdd118e-asistente-de-comunicacion-institucional" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Comunicación institucional</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Memoria Técnica de Ejecución del Proyecto</td>
-  <td data-label="Descripción">Asiste en la creación de memorias de trabajo detalladas.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67f50855ce348191bf9173981dc039a0-memoria-tecnica-de-ejecucion-del-proyecto" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Documentación / Proyectos</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Asistente experto para escribir tu libro</td>
-  <td data-label="Descripción">Convierte tu idea en un libro con ayuda experta.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67dbfe46edc48191a7a2f57b1bc7731d-asistente-experto-para-escribir-tu-libro" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Escritura creativa / Libros</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Comentarios para boletines escolares</td>
-  <td data-label="Descripción">Redacto comentarios personalizados para boletines educativos.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-681dbec91b7481918b3b9d94ccdd118e-asistente-de-comunicacion-institucional" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Evaluación educativa</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Evaluador por Competencias – Docentes Primaria</td>
-  <td data-label="Descripción">Asistente que califica por competencias y calcula niveles de desempeño.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67f8f147bf4881918093f39e65c117ab-evaluador-por-competencias-docentes-primaria" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Evaluación educativa</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Rúbricas evaluación primaria JCyL</td>
-  <td data-label="Descripción">Diseña rúbricas de evaluación alineadas con el currículo de CyL.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67c1998b9d208191a6c20471dae04efa-rubricas-evaluacion-primaria-jcyl" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Evaluación educativa</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Creador de Podcasts Educativos</td>
-  <td data-label="Descripción">Crea podcasts educativos desde cero, con guiones claros y adaptados.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-684023ebb3e48191a0eb67d7d282eef4-creador-de-podcasts-educativos" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Podcast educativos</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Aventuras Literarias: fomento de la lectura</td>
-  <td data-label="Descripción">Diseña actividades de comprensión lectora para Primaria.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67a5dba83fd88191866e26be62826b68-aventuras-literarias-fomento-de-la-lectura" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Fomento de la lectura</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Creador de prompts</td>
-  <td data-label="Descripción">Experto en la elaboración de prompts para modelos de lenguaje.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67977e4f50fc8191952ad423469ee712-creador-de-prompts" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">IA / Prompts</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Asistente IA Educativa</td>
-  <td data-label="Descripción">Transforma tu proyecto de IA aplicada en educación.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-680a1f5bb5808191b7aad60b72144435-asistente-ia-educativa" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">IA en educación</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Ayuda programación didáctica Opos maestros JCyL</td>
-  <td data-label="Descripción">Prepara programaciones y unidades para oposiciones de maestros en Castilla y León.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67af780d4d1c819187f027059f192d60-ayuda-programacion-didactica-opos-maestros-jcyl" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Oposiciones</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Situaciones de aprendizaje Plástica primaria JCyL</td>
-  <td data-label="Descripción">Crea situaciones de aprendizaje de Plástica adaptadas a Primaria bajo normativa LOMLOE.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67a5d84b59c08191b0a0e33051462a93-situaciones-de-aprendizaje-plastica-primaria-jcyl" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Situaciones de aprendizaje - Artística</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Situaciones de aprendizaje E.F. primaria JCyL</td>
-  <td data-label="Descripción">Crea situaciones de aprendizaje de Educación Física adaptadas a Primaria bajo normativa LOMLOE.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-6793d4a5dc0c8191973f5d56b0508df6-situaciones-de-aprendizaje-e-f-primaria-jcyl" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Situaciones de aprendizaje - Educación Física</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Situaciones de aprendizaje Lengua primaria JCyL</td>
-  <td data-label="Descripción">Crea situaciones de aprendizaje de Lengua adaptadas a Primaria bajo normativa LOMLOE.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67935bbee3b48191941e3868e567d4ab-situaciones-de-aprendizaje-lengua-primaria-jcyl" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Situaciones de aprendizaje - Lengua</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Situaciones de aprendizaje francés primaria JCyL</td>
-  <td data-label="Descripción">Crea situaciones de aprendizaje en francés según normativa LOMLOE y legislación de Castilla y León.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67b724e73e248191af219a6064829fb8-situaciones-de-aprendizaje-frances-primaria-jcyl" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Situaciones de aprendizaje - Lengua extranjera</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Situaciones de aprendizaje Inglés primaria JCyL</td>
-  <td data-label="Descripción">Crea situaciones de aprendizaje en inglés según normativa LOMLOE y legislación de Castilla y León.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67ae24b7d2f88191904c02e831b946f5-situaciones-de-aprendizaje-ingles-primaria-jcyl" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Situaciones de aprendizaje - Lengua extranjera</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Situaciones de aprendizaje Matemáticas primaria</td>
-  <td data-label="Descripción">Crea situaciones de aprendizaje de Matemáticas adaptadas a Primaria bajo normativa LOMLOE.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67936730c3048191856e6e93add73590-situaciones-de-aprendizaje-matematicas-primaria" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Situaciones de aprendizaje - Matemáticas</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Situaciones de aprendizaje Música primaria JCyL</td>
-  <td data-label="Descripción">Crea situaciones de aprendizaje de Música adaptadas a Primaria bajo normativa LOMLOE.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-67a5d48915e881918cea4c3a809c1a5a-situaciones-de-aprendizaje-musica-primaria-jcyl" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Situaciones de aprendizaje - Música</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Situaciones de aprendizaje CC Naturales primaria</td>
-  <td data-label="Descripción">Crea situaciones de aprendizaje de Ciencias Naturales adaptadas a Primaria bajo normativa LOMLOE.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-679ca76fa8608191ba6cf61ae6ba06cd-situaciones-de-aprendizaje-cc-naturales-primaria" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Situaciones de aprendizaje - Naturales</td>
-</tr>
-<tr>
-  <td data-label="Nombre">Situaciones de aprendizaje CC Sociales primaria</td>
-  <td data-label="Descripción">Crea situaciones de aprendizaje de Ciencias Sociales adaptadas a Primaria bajo normativa LOMLOE.</td>
-  <td data-label="Enlace"><a href="https://chatgpt.com/g/g-679cba0dd6508191be743a199da1529a-situaciones-de-aprendizaje-cc-sociales-primaria" target="_blank">Acceder</a></td>
-  <td data-label="Tipo">Situaciones de aprendizaje - Sociales</td>
-</tr>
-</tbody>
-    </table>
+    <header>
+      <div class="logo">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <h1>GPTs Educativos Personalizados</h1>
+      <p class="subtitle">Herramientas especializadas para mejorar la enseñanza, el aprendizaje y la gestión educativa</p>
+    </header>
+    
+    <div class="filters">
+      <button class="filter-btn active"><i class="fas fa-star"></i> Todos</button>
+      <button class="filter-btn"><i class="fas fa-book"></i> Asignaturas</button>
+      <button class="filter-btn"><i class="fas fa-clipboard-check"></i> Evaluación</button>
+      <button class="filter-btn"><i class="fas fa-microphone-alt"></i> Podcasts</button>
+      <button class="filter-btn"><i class="fas fa-brain"></i> IA</button>
+    </div>
+    
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acceso</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Nombre">Profe de Mate ESO</td>
+            <td data-label="Descripción">Explica conceptos, resuelve ejercicios y ayuda a preparar clases de matemáticas para la ESO.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67d9641770cc8191a2ee15207fca1fea-profe-de-mate-eso-explicaciones-ejercicios-y-mas" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Asignatura ESO</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Asistente de comunicación institucional</td>
+            <td data-label="Descripción">Redacta y mejora comunicaciones institucionales aplicando las 7 Cs.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-681dbec91b7481918b3b9d94ccdd118e-asistente-de-comunicacion-institucional" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Comunicación</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Memoria Técnica de Ejecución del Proyecto</td>
+            <td data-label="Descripción">Asiste en la creación de memorias de trabajo detalladas.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67f50855ce348191bf9173981dc039a0-memoria-tecnica-de-ejecucion-del-proyecto" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Documentación</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Asistente experto para escribir tu libro</td>
+            <td data-label="Descripción">Convierte tu idea en un libro con ayuda experta.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67dbfe46edc48191a7a2f57b1bc7731d-asistente-experto-para-escribir-tu-libro" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Escritura</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Comentarios para boletines escolares</td>
+            <td data-label="Descripción">Redacto comentarios personalizados para boletines educativos.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-68120c7839f88191807d7d8228e5b557-comentarios-para-boletines-escolares" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Evaluación</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Evaluador por Competencias – Docentes Primaria</td>
+            <td data-label="Descripción">Asistente que califica por competencias y calcula niveles de desempeño.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67f8f147bf4881918093f39e65c117ab-evaluador-por-competencias-docentes-primaria" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Evaluación</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Rúbricas evaluación primaria JCyL</td>
+            <td data-label="Descripción">Diseña rúbricas de evaluación alineadas con el currículo de CyL.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67c1998b9d208191a6c20471dae04efa-rubricas-evaluacion-primaria-jcyl" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Evaluación</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Creador de Podcasts Educativos</td>
+            <td data-label="Descripción">Crea podcasts educativos desde cero, con guiones claros y adaptados.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-684023ebb3e48191a0eb67d7d282eef4-creador-de-podcasts-educativos" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Podcast</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Aventuras Literarias: fomento de la lectura</td>
+            <td data-label="Descripción">Diseña actividades de comprensión lectora para Primaria.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67a5dba83fd88191866e26be62826b68-aventuras-literarias-fomento-de-la-lectura" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Lectura</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Creador de prompts</td>
+            <td data-label="Descripción">Experto en la elaboración de prompts para modelos de lenguaje.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67977e4f50fc8191952ad423469ee712-creador-de-prompts" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">IA</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Asistente IA Educativa</td>
+            <td data-label="Descripción">Transforma tu proyecto de IA aplicada en educación.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-680a1f5bb5808191b7aad60b72144435-asistente-ia-educativa" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">IA</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Ayuda programación didáctica Opos maestros JCyL</td>
+            <td data-label="Descripción">Prepara programaciones y unidades para oposiciones de maestros en Castilla y León.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67af780d4d1c819187f027059f192d60-ayuda-programacion-didactica-opos-maestros-jcyl" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Oposiciones</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Situaciones de aprendizaje Plástica primaria JCyL</td>
+            <td data-label="Descripción">Crea situaciones de aprendizaje de Plástica adaptadas a Primaria bajo normativa LOMLOE.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67a5d84b59c08191b0a0e33051462a93-situaciones-de-aprendizaje-plastica-primaria-jcyl" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Artística</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Situaciones de aprendizaje E.F. primaria JCyL</td>
+            <td data-label="Descripción">Crea situaciones de aprendizaje de Educación Física adaptadas a Primaria bajo normativa LOMLOE.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-6793d4a5dc0c8191973f5d56b0508df6-situaciones-de-aprendizaje-e-f-primaria-jcyl" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Educación Física</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Situaciones de aprendizaje Lengua primaria JCyL</td>
+            <td data-label="Descripción">Crea situaciones de aprendizaje de Lengua adaptadas a Primaria bajo normativa LOMLOE.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67935bbee3b48191941e3868e567d4ab-situaciones-de-aprendizaje-lengua-primaria-jcyl" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Lengua</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Situaciones de aprendizaje francés primaria JCyL</td>
+            <td data-label="Descripción">Crea situaciones de aprendizaje en francés según normativa LOMLOE y legislación de Castilla y León.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67b724e73e248191af219a6064829fb8-situaciones-de-aprendizaje-frances-primaria-jcyl" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Lengua Extranjera</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Situaciones de aprendizaje Inglés primaria JCyL</td>
+            <td data-label="Descripción">Crea situaciones de aprendizaje en inglés según normativa LOMLOE y legislación de Castilla y León.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67ae24b7d2f88191904c02e831b946f5-situaciones-de-aprendizaje-ingles-primaria-jcyl" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Lengua Extranjera</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Situaciones de aprendizaje Matemáticas primaria</td>
+            <td data-label="Descripción">Crea situaciones de aprendizaje de Matemáticas adaptadas a Primaria bajo normativa LOMLOE.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67936730c3048191856e6e93add73590-situaciones-de-aprendizaje-matematicas-primaria" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Matemáticas</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Situaciones de aprendizaje Música primaria JCyL</td>
+            <td data-label="Descripción">Crea situaciones de aprendizaje de Música adaptadas a Primaria bajo normativa LOMLOE.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-67a5d48915e881918cea4c3a809c1a5a-situaciones-de-aprendizaje-musica-primaria-jcyl" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Música</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Situaciones de aprendizaje CC Naturales primaria</td>
+            <td data-label="Descripción">Crea situaciones de aprendizaje de Ciencias Naturales adaptadas a Primaria bajo normativa LOMLOE.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-679ca76fa8608191ba6cf61ae6ba06cd-situaciones-de-aprendizaje-cc-naturales-primaria" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Naturales</span></td>
+          </tr>
+          <tr>
+            <td data-label="Nombre">Situaciones de aprendizaje CC Sociales primaria</td>
+            <td data-label="Descripción">Crea situaciones de aprendizaje de Ciencias Sociales adaptadas a Primaria bajo normativa LOMLOE.</td>
+            <td data-label="Acceso"><a href="https://chatgpt.com/g/g-679cba0dd6508191be743a199da1529a-situaciones-de-aprendizaje-cc-sociales-primaria" target="_blank" class="access-btn"><i class="fas fa-external-link-alt"></i> Acceder</a></td>
+            <td data-label="Tipo"><span class="type-tag">Sociales</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
     <div class="footer">
       <div class="footer-text">
         *El presente trabajo ha sido realizado por Luis Ángel González Ortega durante el curso 2024/2025, gracias a una licencia por estudios y otras actividades de interés para el sistema educativo, convocada por la Consejería de Educación de la Junta de Castilla y León.
+        <div class="signature">— Luis Ángel González Ortega</div>
       </div>
     </div>
   </div>
+
+  <script>
+    // Filtros interactivos
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remover clase activa de todos los botones
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Agregar clase activa al botón clickeado
+          this.classList.add('active');
+          
+          // Aquí iría la lógica para filtrar la tabla
+          // Por simplicidad, en este ejemplo no implementamos el filtrado real
+        });
+      });
+      
+      // Efecto hover para las filas
+      const tableRows = document.querySelectorAll('tbody tr');
+      tableRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+          this.style.transition = 'transform 0.3s ease, background-color 0.3s ease';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
